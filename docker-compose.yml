@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  # ################### backend ###################
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - 9091:9091
+    volumes:
+      - '/usr/app/node_modules'
+      - './backend:/usr/app'
+    environment:
+      TZ: 'Asia/Seoul'
+
+  # ################### frontend ###################
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - 9090:9090
+    volumes:
+      - '/usr/app/node_modules'
+      - './frontend:/usr/app'
+    environment:
+      TZ: 'Asia/Seoul'
