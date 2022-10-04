@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 function Map() {
   let kakaoMap: any;
   const [onloaded, setOnloaded] = useState(false);
+
+  // router를 통해 전달되는 query로 어떤 category를 보고자 하는지 판단하고, e.g. around, study, etc...
+  // 지도에서 원하는 정보를 출력해주자.
+
   useEffect(() => {
     const mapScript = document.createElement('script');
 
