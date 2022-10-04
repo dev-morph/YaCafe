@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 function Header() {
   return (
-    <div className="h-16  ">
+    <div className="h-16 flex justify-between items-center px-2.5">
       <Link href="/menus">
         <span>Ya-Cafe !!</span>
       </Link>
