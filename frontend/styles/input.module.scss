@@ -1,0 +1,21 @@
+$clr-gray300: #4a526b;
+$clr-gray600: #2a324b;
+$clr-gray700: #161d34;
+$clr-bg: #060b23;
+
+/* border radius */
+$radius: 0.2rem;
+
+.form {
+  position: relative;
+
+  &__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid $clr-gray300;
+    background-color: red;
+  }
+}
