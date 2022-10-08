@@ -5,8 +5,18 @@
   height: 4rem;
   position: sticky;
   bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   padding: 1.2rem;
+
+  span {
+    text-align: center;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

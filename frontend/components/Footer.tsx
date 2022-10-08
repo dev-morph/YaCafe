@@ -6,8 +6,11 @@ function Footer() {
   return (
     <footer className={styles.footer}>
       <span>Footer</span>
+      <Link href="/category">
+        <span>Home</span>
+      </Link>
       <Link href="/login">
-        <div>MenuBtn</div>
+        <span>MenuBtn</span>
       </Link>
     </footer>
   );

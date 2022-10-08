@@ -5,8 +5,8 @@ import styles from '../styles/header.module.scss';
 function Header() {
   return (
     <div className={styles.header}>
-      <Link href="/menus">
-        <span>Ya-Cafe !!</span>
+      <Link href="/category">
+        <span className={styles.header__title}>Ya-Cafe !!</span>
       </Link>
     </div>
   );

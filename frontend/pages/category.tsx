@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-const menus = () => {
+const category = () => {
   const categories = [
     { title: '근처 카페', value: 'around' },
     { title: '열공 모드', value: 'study' },
@@ -14,21 +14,21 @@ const menus = () => {
   ];
 
   return (
-    <>
+    <div className="h-full  w-full">
       <ul className="mx-2.5 grid grid-cols-2 gap-2 h-full">
         {categories.map((c, index) => (
           <Link
             key={index}
             href={{ pathname: '/map', query: { sth: c.value } }}
           >
-            <li className="shadow-lg bg-orange-200 height flex justify-center items-center cursor-pointer rounded-md">
+            <li className="shadow-lg bg-clr-gray500 hover:bg-clr-gray400 height flex justify-center items-center cursor-pointer rounded-md">
               <span>{c.title}</span>
             </li>
           </Link>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 
-export default menus;
+export default category;

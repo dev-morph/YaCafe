@@ -5,9 +5,10 @@ interface InputType {
   type: 'text' | 'password';
   label: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  subType: string;
 }
 
-const Input = ({ type, label, onChange }: InputType) => {
+const Input = ({ type, label, onChange, subType }: InputType) => {
   return (
     <div className={styles.form}>
       <input

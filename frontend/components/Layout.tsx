@@ -18,7 +18,9 @@ export const Layout = ({ children }: Props) => {
       </Head>
 
       <Header />
-      <main className={styles.main}>{children}</main>
+      <div className={styles.main__wrapper}>
+        <main className={styles.main}>{children}</main>
+      </div>
 
       <Footer />
     </>
