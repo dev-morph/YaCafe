@@ -1,5 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import Input from '../components/Input';
+import Button from '../components/Button';
 import styles from '../styles/login.module.scss';
 
 type LoginState = {
@@ -54,9 +55,7 @@ const login = () => {
         />
 
         <div className={styles.btn__wrapper}>
-          <button className={styles.login__btn} onClick={submitHandler}>
-            로그인
-          </button>
+          <Button content="로그인" onClick={submitHandler} />
         </div>
       </form>
     </>

@@ -1,11 +1,13 @@
 import React, { useReducer } from 'react';
 import Input from '../components/Input';
+import Button from '../components/Button';
 import styles from '../styles/signup.module.scss';
 
 type LoginState = {
   id: string;
   password: string;
   password__confirm: string;
+  email: string;
 };
 
 type Action = { type: string; value: string };
@@ -18,6 +20,7 @@ const InitialFormData = {
   id: '',
   password: '',
   password__confirm: '',
+  email: '',
 };
 
 function formReducer(state: LoginState, action: Action): LoginState {
@@ -29,6 +32,8 @@ function formReducer(state: LoginState, action: Action): LoginState {
       return { ...state, password: action.value };
     case 'password__confirm':
       return { ...state, password__confirm: action.value };
+    case 'email':
+      return { ...state, email: action.value };
     default:
       throw new Error();
   }
@@ -37,7 +42,6 @@ function formReducer(state: LoginState, action: Action): LoginState {
 const signup = () => {
   const [state, dispatch] = useReducer(formReducer, InitialFormData);
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('e', e);
     dispatch({ type: e.target.name, value: e.target.value });
   };
 
@@ -54,6 +58,8 @@ const signup = () => {
 
         <Input type="text" label="아이디" onChange={inputHandler} name="id" />
 
+        <Input type="text" label="email" onChange={inputHandler} name="email" />
+
         <Input
           type="password"
           label="비밀번호"
@@ -69,9 +75,7 @@ const signup = () => {
         />
 
         <div className={styles.btn__wrapper}>
-          <button className={styles.login__btn} onClick={submitHandler}>
-            가입하기
-          </button>
+          <Button content="회원가입" onClick={submitHandler} />
         </div>
       </form>
     </>
