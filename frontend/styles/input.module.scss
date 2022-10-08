@@ -1,21 +1,60 @@
-$clr-gray300: #4a526b;
+$clr-primary: #18ffff;
+$clr-primary-light: #adffff;
+$clr-primary-dark: #091034;
+
+$clr-gray100: #f9fbff;
+$clr-gray150: #f4f6fb;
+$clr-gray200: #eef1f6;
+$clr-gray300: #e1e5ee;
+$clr-gray400: #767b91;
+$clr-gray500: #4f546c;
 $clr-gray600: #2a324b;
 $clr-gray700: #161d34;
 $clr-bg: #060b23;
 
 /* border radius */
-$radius: 0.2rem;
+$radius: 0.5rem;
 
 .form {
+  margin-left: 1rem;
+  width: 15rem;
   position: relative;
 
   &__input {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
     border: 2px solid $clr-gray300;
-    background-color: red;
+    border-radius: $radius;
+    font-family: inherit;
+    font-size: inherit;
+    color: white;
+    outline: none;
+    padding: 0.2rem;
+    background: none;
+
+    &:hover {
+      border-color: $clr-primary-light;
+      cursor: text;
+    }
+    &:focus {
+      border-color: $clr-primary;
+    }
   }
+  &__label {
+    position: absolute;
+    left: 1rem;
+    top: 0.325em;
+    cursor: text;
+    color: white;
+    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+    background-color: $clr-bg;
+  }
+}
+
+// input창이 focus된 상태이거나,
+// input창의 placeholder가 아무런 값이 없을때,
+.form__input:focus ~ .form__label,
+.form__input:not(:placeholder-shown) ~ .form__label {
+  left: 1.2rem;
+  top: -0.5rem;
+  font-size: 0.9rem;
 }
