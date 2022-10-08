@@ -3,21 +3,21 @@ import Input from '../components/Input';
 import styles from '../styles/login.module.scss';
 
 type LoginState = {
-  ID: string;
+  id: string;
   password: string;
 };
 
 type Action = { type: string; value: string };
 
 const InitialFormData = {
-  ID: '',
+  id: '',
   password: '',
 };
 
 function formReducer(state: LoginState, action: Action): LoginState {
   switch (action.type) {
-    case 'ID':
-      return { ...state, ID: action.value };
+    case 'id':
+      return { ...state, id: action.value };
     case 'password':
       return { ...state, password: action.value };
     default:
@@ -29,7 +29,7 @@ const login = () => {
   const [state, dispatch] = useReducer(formReducer, InitialFormData);
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: e.target.id, value: e.target.value });
+    dispatch({ type: e.target.name, value: e.target.value });
   };
 
   const submitHandler = (e: React.FormEvent<HTMLButtonElement>) => {
@@ -44,9 +44,14 @@ const login = () => {
           <h1>Login</h1>
         </div>
 
-        <Input type="text" label="ID" onChange={inputHandler} />
+        <Input type="text" label="아이디" onChange={inputHandler} name="id" />
 
-        <Input type="password" label="password" onChange={inputHandler} />
+        <Input
+          type="password"
+          label="비밀번호"
+          onChange={inputHandler}
+          name="password"
+        />
 
         <div className={styles.btn__wrapper}>
           <button className={styles.login__btn} onClick={submitHandler}>
