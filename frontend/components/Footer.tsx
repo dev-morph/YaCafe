@@ -1,14 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
+import styles from '../styles/footer.module.scss';
 
 function Footer() {
   return (
-    <div className="h-16 w-full absolute bottom-0 z-50 flex justify-between items-center px-2.5">
+    <footer className={styles.footer}>
       <span>Footer</span>
       <Link href="/login">
         <div>MenuBtn</div>
       </Link>
-    </div>
+    </footer>
   );
 }
 

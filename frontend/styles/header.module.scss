@@ -1,0 +1,13 @@
+@import 'common';
+
+.header {
+  position: sticky;
+  top: 0;
+  background-color: $clr-bg;
+  z-index: 1000;
+  height: 3.33rem;
+  border-bottom: 2px solid $clr-gray400;
+  display: flex;
+  align-items: center;
+  padding: 1.2rem;
+}

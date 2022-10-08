@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
+import styles from '../styles/header.module.scss';
 
 function Header() {
   return (
-    <div className="h-16 flex justify-between items-center px-2.5">
+    <div className={styles.header}>
       <Link href="/menus">
         <span>Ya-Cafe !!</span>
       </Link>
