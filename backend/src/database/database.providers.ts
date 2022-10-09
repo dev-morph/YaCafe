@@ -1,10 +1,10 @@
 import { DataSource } from 'typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { join } from 'path';
 
 export const databaseProviders = [
   {
     provide: 'DATA_SOURCE',
-    useFactory: async (configService: ConfigService) => {
+    useFactory: async () => {
       const dataSource = new DataSource({
         type: 'mysql',
         host: 'host.docker.internal',
@@ -12,7 +12,8 @@ export const databaseProviders = [
         username: process.env.DB__USER__NAME,
         password: process.env.DB__PASSWORD,
         database: process.env.DB__DATABASE,
-        entities: [__dirname + '/../**/*.entity.ts'],
+        entities: ['dist/**/*.entity.js'],
+        // entities: [join(__dirname, '**', '*.entity{.ts,.js}')],
         synchronize: true,
       });
 
