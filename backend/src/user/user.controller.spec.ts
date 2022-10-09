@@ -21,7 +21,7 @@ describe('UserController', () => {
   });
 
   it('should be defined', () => {
-    userService.signup();
-    expect(userController).toBeDefined();
+    mockUserService.signup.mockImplementation(() => 'success');
+    expect(userController.signup()).toEqual('success');
   });
 });
