@@ -1,54 +1,66 @@
-import React, { useReducer } from 'react';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import styles from '../styles/signup.module.scss';
+import axios from 'axios'
+import React, { useReducer } from 'react'
+import Input from '../components/Input'
+import Button from '../components/Button'
+import styles from '../styles/signup.module.scss'
 
 type LoginState = {
-  id: string;
-  password: string;
-  password__confirm: string;
-  email: string;
-};
+  id: string
+  password: string
+  password__confirm: string
+  email: string
+}
 
-type Action = { type: string; value: string };
+type Action = { type: string; value: string }
 
 type InputType = HTMLInputElement & {
-  name: string;
-};
+  name: string
+}
 
 const InitialFormData = {
   id: '',
   password: '',
   password__confirm: '',
   email: '',
-};
+}
 
-function formReducer(state: LoginState, action: Action): LoginState {
-  console.log('Action would be', action);
+function reducer(state: LoginState, action: Action): LoginState {
+  console.log('Action would be', action)
   switch (action.type) {
     case 'id':
-      return { ...state, id: action.value };
+      return { ...state, id: action.value }
     case 'password':
-      return { ...state, password: action.value };
+      return { ...state, password: action.value }
     case 'password__confirm':
-      return { ...state, password__confirm: action.value };
+      return { ...state, password__confirm: action.value }
     case 'email':
-      return { ...state, email: action.value };
+      return { ...state, email: action.value }
     default:
-      throw new Error();
+      throw new Error()
   }
 }
 
-const signup = () => {
-  const [state, dispatch] = useReducer(formReducer, InitialFormData);
+const Signup = () => {
+  const [state, dispatch] = useReducer(reducer, InitialFormData)
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: e.target.name, value: e.target.value });
-  };
+    dispatch({ type: e.target.name, value: e.target.value })
+  }
 
-  const submitHandler = (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    console.log('final', state);
-  };
+  const submitHandler = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    const { password__confirm, ...userData } = state
+    const result = await axios.post(
+      'http://localhost:9091/user/signup',
+      userData,
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
+    )
+    // const result = await axios.get('http://localhost:9091/user')
+    console.log('result is ', result)
+  }
   return (
     <>
       <form className={styles.form} action="submit">
@@ -79,7 +91,7 @@ const signup = () => {
         </div>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default signup;
+export default Signup

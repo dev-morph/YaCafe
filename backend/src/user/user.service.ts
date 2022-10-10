@@ -9,9 +9,10 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
   async signup(user) {
-    const result = await this.userRepository.insert(user);
-    console.log('result is ', result);
-    console.log('in service');
+    console.log('user is ', user);
+    // const result = await this.userRepository.insert(user);
+    // console.log('result is ', result);
+    // console.log('in service');
     return 'success';
   }
 }
