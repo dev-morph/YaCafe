@@ -1,5 +1,5 @@
 import { UserService } from './user.service';
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 
 @Controller('user')
 export class UserController {
@@ -11,8 +11,8 @@ export class UserController {
   }
 
   @Post('signup')
-  signup() {
-    console.log('here is sigup');
-    return this.userService.signup();
+  signup(@Body() user) {
+    console.log('here is sigup, userInfo would be', user);
+    return this.userService.signup(user);
   }
 }
