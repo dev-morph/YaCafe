@@ -58,7 +58,6 @@ const Signup = () => {
         },
       }
     )
-    // const result = await axios.get('http://localhost:9091/user')
     console.log('result is ', result)
   }
   return (
