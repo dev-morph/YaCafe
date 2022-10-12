@@ -1,5 +1,6 @@
-import axios from 'axios'
 import React, { useReducer } from 'react'
+import axios from 'axios'
+import { useRouter } from 'next/router'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import styles from '../styles/signup.module.scss'
@@ -41,6 +42,8 @@ function reducer(state: LoginState, action: Action): LoginState {
 }
 
 const Signup = () => {
+  const router = useRouter()
+
   const [state, dispatch] = useReducer(reducer, InitialFormData)
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: e.target.name, value: e.target.value })
@@ -58,7 +61,7 @@ const Signup = () => {
         },
       }
     )
-    console.log('result is ', result)
+    router.push('/category')
   }
   return (
     <>
