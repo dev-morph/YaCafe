@@ -7,7 +7,8 @@ export const databaseProviders = [
     useFactory: async () => {
       const dataSource = new DataSource({
         type: 'mysql',
-        host: 'host.docker.internal',
+        host: 'localhost',
+        // host: 'host.docker.internal',
         port: Number(process.env.DB__PORT),
         username: process.env.DB__USER__NAME,
         password: process.env.DB__PASSWORD,

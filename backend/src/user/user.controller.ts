@@ -6,7 +6,6 @@ export class UserController {
   constructor(private userService: UserService) {}
   @Get('')
   getUserList() {
-    console.log('here');
     return 'getUserList Api';
   }
 
