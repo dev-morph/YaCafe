@@ -21,7 +21,7 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - '/usr/app/node_modules'
+      #- '/usr/app/node_modules'
       - './frontend:/usr/app'
     environment:
       TZ: 'Asia/Seoul'

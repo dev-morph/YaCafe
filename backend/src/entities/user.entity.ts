@@ -15,6 +15,7 @@ export class User {
   @Column()
   email: string;
 
+  /** 새로운 User객체를 생성해주는 메소드*/
   static create({ id, password, email }) {
     const user = new User();
     user.id = id;
@@ -23,6 +24,7 @@ export class User {
     return user;
   }
 
+  /**PlainText로 받은 Password를 자동으로 Hash하여 DB에 저장해주는 메소드 */
   @BeforeInsert()
   async hashPlainPassword() {
     console.log('here');

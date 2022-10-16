@@ -1,42 +1,51 @@
-import React, { useReducer, useState } from 'react';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import styles from '../styles/login.module.scss';
+import React, { useReducer, useState } from 'react'
+import Input from '../components/Input'
+import Button from '../components/Button'
+import styles from '../styles/login.module.scss'
+import axios from 'axios'
 
 type LoginState = {
-  id: string;
-  password: string;
-};
+  id: string
+  password: string
+}
 
-type Action = { type: string; value: string };
+type Action = { type: string; value: string }
 
 const InitialFormData = {
   id: '',
   password: '',
-};
+}
 
 function formReducer(state: LoginState, action: Action): LoginState {
   switch (action.type) {
     case 'id':
-      return { ...state, id: action.value };
+      return { ...state, id: action.value }
     case 'password':
-      return { ...state, password: action.value };
+      return { ...state, password: action.value }
     default:
-      throw new Error();
+      throw new Error()
   }
 }
 
-const login = () => {
-  const [state, dispatch] = useReducer(formReducer, InitialFormData);
+const Login = () => {
+  const [state, dispatch] = useReducer(formReducer, InitialFormData)
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: e.target.name, value: e.target.value });
-  };
+    dispatch({ type: e.target.name, value: e.target.value })
+  }
 
-  const submitHandler = (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    console.log('final', state);
-  };
+  const submitHandler = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    try {
+      return await axios.post('http://localhost:9091/user/login', state, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      })
+    } catch (error) {
+      console.log('error occured at login', error)
+    }
+  }
 
   return (
     <>
@@ -59,7 +68,7 @@ const login = () => {
         </div>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default login;
+export default Login

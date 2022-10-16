@@ -1,5 +1,6 @@
+import { LocalAuthGuard } from './../auth/local-auth.guard';
 import { UserService } from './user.service';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 
 @Controller('user')
 export class UserController {
@@ -9,9 +10,14 @@ export class UserController {
     return 'getUserList Api';
   }
 
+  @UseGuards(LocalAuthGuard)
+  @Post('login')
+  login(@Req() req) {
+    return req.user;
+  }
+
   @Post('signup')
   signup(@Body() user) {
-    console.log('here is sigup, userInfo would be', user);
     return this.userService.signup(user);
   }
 }
