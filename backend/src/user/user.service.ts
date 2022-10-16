@@ -21,7 +21,9 @@ export class UserService {
     return await this.userRepository.save(User.create(user));
   }
 
+  /**id를 가진 user를 찾는 함수 */
   async findUser(userId: string): Promise<User> {
-    return this.userRepository.findOne({ where: { id: userId } });
+    const result = await this.userRepository.findOne({ where: { id: userId } });
+    return result;
   }
 }

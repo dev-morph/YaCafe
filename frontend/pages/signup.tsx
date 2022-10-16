@@ -10,32 +10,33 @@ type LoginState = {
   password: string
   password__confirm: string
   email: string
+  isIdChecked: boolean
 }
 
-type Action = { type: string; value: string }
-
-type InputType = HTMLInputElement & {
-  name: string
-}
+type Action = { type: string; value: string | boolean }
 
 const InitialFormData = {
   id: '',
   password: '',
   password__confirm: '',
   email: '',
+  isIdChecked: false,
 }
 
 function reducer(state: LoginState, action: Action): LoginState {
   console.log('Action would be', action)
   switch (action.type) {
     case 'id':
-      return { ...state, id: action.value }
+      //아이디를 변경하는 경우, idCheck다시 하도록 isIdChecked값을 false로 설정
+      return { ...state, id: action.value as string, isIdChecked: false }
     case 'password':
-      return { ...state, password: action.value }
+      return { ...state, password: action.value as string }
     case 'password__confirm':
-      return { ...state, password__confirm: action.value }
+      return { ...state, password__confirm: action.value as string }
     case 'email':
-      return { ...state, email: action.value }
+      return { ...state, email: action.value as string }
+    case 'isIdChecked':
+      return { ...state, isIdChecked: action.value as boolean }
     default:
       throw new Error()
   }
@@ -49,9 +50,30 @@ const Signup = () => {
     dispatch({ type: e.target.name, value: e.target.value })
   }
 
+  const checkIdDuplication = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    const { id } = state
+    try {
+      const result = await axios.get(`http://localhost:9091/user/${id}`)
+      if (result.data.code === 204) {
+        dispatch({ type: 'isIdChecked', value: true })
+      }
+      alert(result.data.message)
+      return
+    } catch (error) {
+      console.log('error occured at checkIdDuplication', error)
+    }
+  }
+
   const submitHandler = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    const { password__confirm, ...userData } = state
+    const { isIdChecked, password__confirm, ...userData } = state
+
+    if (!isIdChecked) {
+      alert('ID 중복체크를 해주세요.')
+      return
+    }
+
     const result = await axios.post(
       'http://localhost:9091/user/signup',
       userData,
@@ -71,7 +93,7 @@ const Signup = () => {
         </div>
 
         <Input type="text" label="아이디" onChange={inputHandler} name="id" />
-
+        <Button content="아이디 중복 체크" onClick={checkIdDuplication} />
         <Input type="text" label="email" onChange={inputHandler} name="email" />
 
         <Input
