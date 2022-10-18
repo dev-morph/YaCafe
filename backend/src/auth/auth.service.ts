@@ -10,6 +10,7 @@ export class AuthService {
     const user = await this.userService.findUser(userId);
     const result = await validatePassword(password, user.password);
 
+    console.log('user result', user, result);
     if (user && result) {
       const { password, ...result } = user;
       return result;

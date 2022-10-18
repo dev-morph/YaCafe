@@ -37,10 +37,11 @@ const Login = () => {
   const submitHandler = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
     try {
-      return await axios.post('http://localhost:9091/user/login', state, {
+      return await axios.post('http://localhost:9091/api/auth/login', state, {
         headers: {
           'Access-Control-Allow-Origin': '*',
         },
+        withCredentials: true,
       })
     } catch (error) {
       console.log('error occured at login', error)

@@ -10,7 +10,7 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { User } from 'src/entities/user.entity';
+import { Request, Response } from 'express';
 
 @Controller('user')
 export class UserController {
@@ -22,7 +22,8 @@ export class UserController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Req() req) {
+  login(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+    res.cookie('Authentication', true);
     return req.user;
   }
 
@@ -32,17 +33,12 @@ export class UserController {
   }
 
   @Get(':id')
-  async findOne(
-    @Param() { id },
-    @Res({ passthrough: true }) res: Response,
-  ): Promise<any> {
+  async findOne(@Param() { id }): Promise<any> {
+    console.log('what..?');
     const result = await this.userService.findUser(id);
     if (!result) {
       return { code: 204, message: '아이디 사용 가능합니다.' };
-    } else {
-      return { message: '이미 아이디가 존재 합니다.' };
     }
-
-    return result;
+    return { message: '이미 아이디가 존재 합니다.' };
   }
 }

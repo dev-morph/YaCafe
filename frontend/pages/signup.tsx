@@ -54,7 +54,7 @@ const Signup = () => {
     e.preventDefault()
     const { id } = state
     try {
-      const result = await axios.get(`http://localhost:9091/user/${id}`)
+      const result = await axios.get(`http://localhost:9091/api/user/${id}`)
       if (result.data.code === 204) {
         dispatch({ type: 'isIdChecked', value: true })
       }
@@ -75,7 +75,7 @@ const Signup = () => {
     }
 
     const result = await axios.post(
-      'http://localhost:9091/user/signup',
+      'http://localhost:9091/api/user/signup',
       userData,
       {
         headers: {
