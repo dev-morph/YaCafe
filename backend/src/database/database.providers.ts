@@ -1,5 +1,4 @@
 import { DataSource } from 'typeorm';
-import { join } from 'path';
 
 export const databaseProviders = [
   {
@@ -13,7 +12,7 @@ export const databaseProviders = [
         username: process.env.DB__USER__NAME,
         password: process.env.DB__PASSWORD,
         database: process.env.DB__DATABASE,
-        entities: ['dist/**/*.entity.js'],
+        entities: ['dist/**/entities/*.entity.js'],
         // entities: [join(__dirname, '**', '*.entity{.ts,.js}')],
         synchronize: true,
       });

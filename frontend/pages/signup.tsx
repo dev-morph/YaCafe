@@ -75,7 +75,7 @@ const Signup = () => {
     }
 
     const result = await axios.post(
-      'http://localhost:9091/api/user/signup',
+      'http://localhost:9091/api/auth/signup',
       userData,
       {
         headers: {
