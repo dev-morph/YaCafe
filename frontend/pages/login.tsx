@@ -1,4 +1,5 @@
 import React, { useReducer, useState } from 'react'
+import { useRouter } from 'next/router'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import styles from '../styles/login.module.scss'
@@ -28,6 +29,7 @@ function formReducer(state: LoginState, action: Action): LoginState {
 }
 
 const Login = () => {
+  const router = useRouter()
   const [state, dispatch] = useReducer(formReducer, InitialFormData)
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,12 +39,18 @@ const Login = () => {
   const submitHandler = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
     try {
-      return await axios.post('http://localhost:9091/api/auth/login', state, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-        withCredentials: true,
-      })
+      const result = await axios.post(
+        'http://localhost:9091/api/auth/login',
+        state,
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+          },
+          withCredentials: true,
+        }
+      )
+      if (result.status === 201) router.push('/category')
+      return 'success'
     } catch (error) {
       console.log('error occured at login', error)
     }

@@ -1,3 +1,4 @@
+import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import { LocalAuthGuard } from './../auth/local-auth.guard';
 import { UserService } from './user.service';
 import {
@@ -20,17 +21,12 @@ export class UserController {
     return 'getUserList Api';
   }
 
-  // @UseGuards(LocalAuthGuard)
-  // @Post('login')
-  // login(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-  //   res.cookie('Authentication', true);
-  //   return req.user;
-  // }
-
-  // @Post('signup')
-  // signup(@Body() user) {
-  //   return this.userService.signup(user);
-  // }
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getProfile(@Req() req: Request) {
+    // console.log('got here');
+    return req.user;
+  }
 
   @Get(':id')
   async findOne(@Param() { id }): Promise<any> {
