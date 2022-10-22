@@ -5,7 +5,6 @@ import styles from '../styles/footer.module.scss'
 function Footer() {
   return (
     <footer className={styles.footer}>
-      <span>Footer</span>
       <Link href="/category">
         <span>Home</span>
       </Link>
