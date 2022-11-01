@@ -11,7 +11,7 @@ const customInterceptor = axios.create({
 
 customInterceptor.interceptors.request.use(
   (config) => {
-    console.log('before send request')
+    console.log('before send request!')
     return config
   },
   (error) => {
