@@ -1,0 +1,47 @@
+.animation__wrapper {
+  position: absolute;
+  top: 5rem;
+  height: 300px;
+  width: 300px;
+  z-index: 10;
+  background-color: blue;
+
+  .items {
+    position: relative;
+    height: 1rem;
+    width: 1rem;
+    background: rgba(180, 180, 180, 0.9794511554621849);
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    // border: 1px solid black;
+    z-index: 11;
+    animation: comet 2s infinite 1s ease-in-out;
+    // position: absolute;
+    // top: 0;
+    &:before {
+      content: '';
+      display: block;
+      background: linear-gradient(
+        90deg,
+        rgba(180, 180, 180, 0) 0%,
+        rgba(180, 180, 180, 1) 90%,
+        rgba(180, 180, 180, 0.9794511554621849) 100%
+      );
+      width: 2rem;
+      height: 1rem;
+      position: absolute;
+      top: 0;
+      left: -2rem;
+      //   border: 1px solid black;
+    }
+  }
+}
+
+@keyframes comet {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(200px);
+  }
+}
